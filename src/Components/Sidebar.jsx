@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import Sidelinks from "./Sidelinks";
+import { UserContext } from "../Context/UserContext";
 
 function Sidebar({ setModal }) {
+  const { user } = useContext(UserContext);
   return (
     <aside className="bg-slate-100 w-1/6 h-full min-w-fit flex flex-col items-center rounded-l-xl p-3">
       <a href="/">
@@ -21,7 +23,9 @@ function Sidebar({ setModal }) {
           className="w-2/5 rounded-full "
         />
         <h3 className="font-bold">Hec Sherlock</h3>
-        <p className="text-slate-400">hecsherlock@gmail.com</p>
+        <p className="text-slate-400">
+          {user?.email ? user.email : "emialaddress@yours.com"}
+        </p>
       </div>
 
       <nav id="navbar">

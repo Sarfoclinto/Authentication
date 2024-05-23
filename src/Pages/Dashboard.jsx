@@ -1,12 +1,17 @@
-import React, { useContext } from "react";
-import { UserContext } from "../Context/UserContext";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import Card from "../Components/Card";
+import CardNav from "../Components/CardNav";
 
 function Dashboard() {
-  // const { user } = useContext(UserContext)
-  
   return (
-    <div>Dashboard</div>
+    <div id="dashboard" className="debug w-full p-1 ">
+      <CardNav />
+      <div id="content">
+        <div id="cards">
+          <Card title="Web Development" task={10} value={96} />
+        </div>
+      </div>
+    </div>
   );
 }
 
