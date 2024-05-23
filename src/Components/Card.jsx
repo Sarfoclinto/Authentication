@@ -1,8 +1,8 @@
 import React from "react";
 
-function Card({ title, task, value }) {
+function Card({ title, task, value, bg }) {
   return (
-    <div id="card" className="w-1/5 bg-[#71357b] p-2 rounded-xl">
+    <div id="card" className={`w-1/5 bg-[${bg}] p-2 rounded-xl`}>
       <div id="heading" className="w-full flex justify-between items-center">
         <div id="images" className="flex relative items-center">
           <img
