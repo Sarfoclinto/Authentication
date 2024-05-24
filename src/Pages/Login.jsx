@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { UserContext } from "../Context/UserContext";
 import { v4 as uuid } from "uuid";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,14 @@ import { useNavigate } from "react-router-dom";
 function Login() {
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   const user = JSON.parse(sessionStorage.getItem("user"));
+  //   const userToken = user?.userToken;
+  //   if (userToken) {
+  //     navigate("/dashboard");
+  //   }
+  // }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

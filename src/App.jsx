@@ -2,11 +2,10 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useNavigate,
   Navigate,
 } from "react-router-dom";
 import Login from "./Pages/Login";
-import { Children, useState } from "react";
+import { Children, useEffect, useState } from "react";
 import Dashboard from "./Pages/Dashboard";
 import Sidebar from "./Components/Sidebar";
 import Tasklist from "./Pages/Tasklist";
@@ -28,15 +27,17 @@ function App() {
     });
   };
 
-  const user = JSON.parse(sessionStorage.getItem("user"));
-  const userToken = user?.userToken;
+  
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    const userToken = user?.userToken;
+  
 
   return (
     <>
       <div id="app" className="w-full h-dvh p-10">
         <div
           id="content"
-          className="bg-slate-300 w-full flex gap-x-3 h-full rounded-2xl p-5"
+          className=" w-full flex gap-x-3 h-full rounded-2xl p-5"
         >
           <UserContextProvider>
             <Sidebar setModal={setModal} />
