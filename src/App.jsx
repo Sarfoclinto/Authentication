@@ -5,7 +5,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import Login from "./Pages/Login";
-import { Children, useEffect, useState } from "react";
+import { useState } from "react";
 import Dashboard from "./Pages/Dashboard";
 import Sidebar from "./Components/Sidebar";
 import Tasklist from "./Pages/Tasklist";
@@ -14,6 +14,7 @@ import TaskContextProvider from "./Context/TaskContext";
 import UserContextProvider from "./Context/UserContext";
 import Modal from "./Components/Modal";
 import AddTask from "./Components/AddTask";
+import PrivateRoutes from "./Components/PrivateRoutes";
 
 function App() {
   const [modal, setModal] = useState({
@@ -27,10 +28,8 @@ function App() {
     });
   };
 
-  
-    const user = JSON.parse(sessionStorage.getItem("user"));
-    const userToken = user?.userToken;
-  
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  const userToken = user?.userToken;
 
   return (
     <>
@@ -48,15 +47,11 @@ function App() {
               </Modal>
               <Router>
                 <Routes>
-                  <Route exact path="/" element={<Home />} />
-                  <Route
-                    exact
-                    path="/dashboard"
-                    element={
-                      userToken ? <Dashboard /> : <Navigate replace to={"/"} />
-                    }
-                  />
-                  <Route exact path="/tasklist" element={<Tasklist />} />
+                  <Route exact path="/login" element={<Login />} />
+                  <Route path="/" element={<PrivateRoutes />}>
+                    <Route path="dashboard" element={<Dashboard />} />
+                    <Route path="tasklist" element={<Tasklist />} />
+                  </Route>
                 </Routes>
               </Router>
             </TaskContextProvider>

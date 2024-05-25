@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { UserContext } from "../Context/UserContext";
 import { v4 as uuid } from "uuid";
 import { useNavigate } from "react-router-dom";
@@ -6,14 +6,6 @@ import { useNavigate } from "react-router-dom";
 function Login() {
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   const user = JSON.parse(sessionStorage.getItem("user"));
-  //   const userToken = user?.userToken;
-  //   if (userToken) {
-  //     navigate("/dashboard");
-  //   }
-  // }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,13 +19,25 @@ function Login() {
 
   const handleLogin = () => {
     const token = uuid();
-    setUser((prev) => {
-      return {
-        ...prev,
-        userToken: token,
-      };
-    });
-
+    fetch("https://jsonplaceholder.typicode.com/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        return setUser(() => {
+          return {
+            email: data.email,
+            password: data.password,
+            id: data.id,
+            userToken: token,
+          };
+        });
+      });
     navigate("/dashboard");
   };
 
