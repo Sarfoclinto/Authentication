@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { TaskContext } from "../Context/TaskContext";
 import Task from "../Components/Task";
 
-function Tasklist() {
+function Tasklist({ setModal }) {
   const { tasks, setTask } = useContext(TaskContext);
 
   return (
@@ -13,7 +13,19 @@ function Tasklist() {
             <tr className="w-full">
               <th>Task</th>
               <th>Date</th>
-              <th>Action</th>
+              <th className="flex justify-center items-center border-0 gap-10">
+                Action
+                <button
+                  className=""
+                  onClick={() => {
+                    setModal((prev) => {
+                      return { ...prev, active: true };
+                    });
+                  }}
+                >
+                  <img src={"src/assets/add.png"} alt="" className="w-[34px]" />
+                </button>
+              </th>
             </tr>
           </thead>
           <tbody className="w-full">
@@ -30,7 +42,18 @@ function Tasklist() {
           </tbody>
         </table>
       ) : (
-        <div className="w-full text-black text-3xl font-bold">No Task...</div>
+        <div className="w-full text-black text-3xl font-bold h-fit flex justify-between items-center">
+          <div>No Task...</div>
+          <button
+            onClick={() => {
+              setModal((prev) => {
+                return { ...prev, active: true };
+              });
+            }}
+          >
+            <img src={"src/assets/add.png"} alt="" className="w-4/5" />
+          </button>
+        </div>
       )}
     </>
   );

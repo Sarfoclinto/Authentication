@@ -4,7 +4,8 @@ import { v4 as uuid } from "uuid";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, isAuthenticated, setIsAuthenticated } =
+    useContext(UserContext);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -18,6 +19,7 @@ function Login() {
   };
 
   const handleLogin = () => {
+    !isAuthenticated && alert("Loading...");
     const token = uuid();
     fetch("https://jsonplaceholder.typicode.com/users", {
       method: "POST",
@@ -28,7 +30,7 @@ function Login() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        setIsAuthenticated(true);
         return setUser(() => {
           return {
             email: data.email,
@@ -38,7 +40,7 @@ function Login() {
           };
         });
       });
-    navigate("/dashboard");
+    isAuthenticated && navigate("/dashboard");
   };
 
   return (
@@ -95,6 +97,7 @@ function Login() {
           <button
             onClick={handleLogin}
             className="bg-blue-600 text-white font-normal p-2 my-3 rounded-lg"
+            disabled={isAuthenticated}
           >
             Log in
           </button>

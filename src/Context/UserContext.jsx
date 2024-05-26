@@ -10,11 +10,12 @@ function UserContextProvider(props) {
       userToken: "",
     }
   );
+  const [isAuthenticated, setIsAuthenticated]=useState(false)
   useEffect(() => {
     sessionStorage.setItem("user", JSON.stringify(user));
   }, [user]);
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, isAuthenticated, setIsAuthenticated }}>
       {props.children}
     </UserContext.Provider>
   );

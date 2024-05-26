@@ -50,7 +50,7 @@ function App() {
                   <Route exact path="/login" element={<Login />} />
                   <Route path="/" element={<PrivateRoutes />}>
                     <Route path="dashboard" element={<Dashboard />} />
-                    <Route path="tasklist" element={<Tasklist />} />
+                    <Route path="tasklist" element={<Tasklist setModal={setModal} />} />
                   </Route>
                 </Routes>
               </Router>

@@ -5,9 +5,30 @@ export const TaskContext = createContext();
 const TaskContextProvider = (props) => {
   const [tasks, setTask] = useState(
     JSON.parse(sessionStorage.getItem("tasks")) || [
-      { task: "Do homework", date: "2024-03-01", complete: false, id: 1 },
-      { task: "Learn API", date: "2024-05-11", complete: false, id: 2 },
-      { task: "Learn react", date: "2024-11-11", complete: false, id: 3 },
+      {
+        title: "Assignments",
+        task: "Do homework",
+        date: "2024-03-01",
+        complete: false,
+        id: 1,
+        bg: "orange-li-bg",
+      },
+      {
+        title: "Studies",
+        task: "Learn API",
+        date: "2024-05-11",
+        complete: false,
+        id: 2,
+        bg: "purple-lin-bg",
+      },
+      {
+        title: "Studies",
+        task: "Learn react",
+        date: "2024-11-11",
+        complete: false,
+        id: 3,
+        bg: "blue-lin-bg",
+      },
     ]
   );
   const [newTask, setNewTask] = useState({

@@ -30,21 +30,8 @@ function Sidebar({ setModal }) {
 
       <nav id="navbar">
         <ul className="flex flex-col gap-y-2">
-          <Sidelinks name="Dashboard" img="home" href="dashboard" />
-          <Sidelinks name="Tasklist" img="task" href="tasklist" />
-          <li
-            className="flex items-center py-2 gap-x-2 cursor-pointer hover:border-2 hover:px-3 hover:border-r-0 hover:border-l-0"
-            onClick={() => {
-              setModal((prev) => {
-                return { ...prev, active: true };
-              });
-            }}
-          >
-            <img src={"src/assets/add.png"} alt="" className="w-2/12" />
-            <p className="text-purple-700 font-semibold text-base hover:text-black">
-              Add Task
-            </p>
-          </li>
+          <Sidelinks name="Dashboard" img="home" to="dashboard" />
+          <Sidelinks name="Tasklist" img="task" to="tasklist" />
         </ul>
       </nav>
     </aside>
