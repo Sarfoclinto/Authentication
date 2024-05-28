@@ -1,15 +1,9 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./Pages/Login";
 import { useState } from "react";
 import Dashboard from "./Pages/Dashboard";
 import Sidebar from "./Components/Sidebar";
 import Tasklist from "./Pages/Tasklist";
-import Home from "./Pages/Home";
 import TaskContextProvider from "./Context/TaskContext";
 import UserContextProvider from "./Context/UserContext";
 import Modal from "./Components/Modal";
@@ -28,11 +22,8 @@ function App() {
     });
   };
 
-  const user = JSON.parse(sessionStorage.getItem("user"));
-  const userToken = user?.userToken;
-
   return (
-    <>
+    <Router>
       <div id="app" className="w-full h-dvh p-10">
         <div
           id="content"
@@ -40,25 +31,26 @@ function App() {
         >
           <UserContextProvider>
             <Sidebar setModal={setModal} />
-
             <TaskContextProvider>
               <Modal modalOpen={modal.active} closeModal={closeModal}>
                 <AddTask setModal={setModal} />
               </Modal>
-              <Router>
-                <Routes>
-                  <Route exact path="/login" element={<Login />} />
-                  <Route path="/" element={<PrivateRoutes />}>
-                    <Route path="dashboard" element={<Dashboard />} />
-                    <Route path="tasklist" element={<Tasklist setModal={setModal} />} />
-                  </Route>
-                </Routes>
-              </Router>
+
+              <Routes>
+                <Route exact path="/login" element={<Login />} />
+                <Route path="/" element={<PrivateRoutes />}>
+                  <Route path="dashboard" element={<Dashboard />} />
+                  <Route
+                    path="tasklist"
+                    element={<Tasklist setModal={setModal} />}
+                  />
+                </Route>
+              </Routes>
             </TaskContextProvider>
           </UserContextProvider>
         </div>
       </div>
-    </>
+    </Router>
   );
 }
 

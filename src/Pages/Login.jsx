@@ -1,16 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../Context/UserContext";
 import { v4 as uuid } from "uuid";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const { user, setUser, isAuthenticated, setIsAuthenticated } =
-    useContext(UserContext);
+  const { user, setUser, loading, setLoading } = useContext(UserContext);
   const navigate = useNavigate();
+
+  const [userinfo, setUserInfo] = useState({
+    email: "",
+    password: "",
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUser((prev) => {
+    setUserInfo((prev) => {
       return {
         ...prev,
         [name]: value,
@@ -19,19 +23,19 @@ function Login() {
   };
 
   const handleLogin = () => {
-    !isAuthenticated && alert("Loading...");
+    setLoading(true);
     const token = uuid();
     fetch("https://jsonplaceholder.typicode.com/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(user),
+      body: JSON.stringify(userinfo),
     })
       .then((res) => res.json())
       .then((data) => {
-        setIsAuthenticated(true);
-        return setUser(() => {
+        setLoading(false);
+        setUser(() => {
           return {
             email: data.email,
             password: data.password,
@@ -39,8 +43,10 @@ function Login() {
             userToken: token,
           };
         });
+      })
+      .then(() => {
+        navigate("/dashboard");
       });
-    isAuthenticated && navigate("/dashboard");
   };
 
   return (
@@ -66,7 +72,7 @@ function Login() {
             name="email"
             placeholder="name@company.com"
             id="email"
-            value={user.email}
+            value={userinfo.email}
             onChange={handleChange}
             className="border py-2 px-32 pl-[10px] rounded-lg outline-none"
           />
@@ -78,7 +84,7 @@ function Login() {
             placeholder="*********"
             name="password"
             id="password"
-            value={user.password}
+            value={userinfo.password}
             onChange={handleChange}
             className="border py-2 px-32 pl-[10px] rounded-lg outline-none"
           />
@@ -97,9 +103,8 @@ function Login() {
           <button
             onClick={handleLogin}
             className="bg-blue-600 text-white font-normal p-2 my-3 rounded-lg"
-            disabled={isAuthenticated}
           >
-            Log in
+            {loading ? "Loading" : "Log in"}
           </button>
           <div className="flex items-center gap-2 justify-between">
             <button className="flex items-center gap-2 w-1/2 border px-5 py-2 rounded-lg">
