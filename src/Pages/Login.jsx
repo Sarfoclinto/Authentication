@@ -34,6 +34,7 @@ function Login() {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         setLoading(false);
         setUser(() => {
           return {
