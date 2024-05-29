@@ -4,11 +4,11 @@ function Card({ title, task, value, bg }) {
   return (
     <div id="card" className={`w-1/5 ${bg} p-2 rounded-xl`}>
       <div id="heading" className="w-full flex justify-between items-center">
-        <div id="images" className="flex relative items-center">
+        <div id="images" className="flex relative z items-center">
           <img
             src="src/assets/vege.png"
             alt=""
-            className="w-1/6 rounded-full"
+            className="w-1/6 rounded-full "
           />
           <img
             src="src/assets/vege.png"

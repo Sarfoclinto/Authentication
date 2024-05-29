@@ -9,6 +9,7 @@ import UserContextProvider from "./Context/UserContext";
 import Modal from "./Components/Modal";
 import AddTask from "./Components/AddTask";
 import PrivateRoutes from "./Components/PrivateRoutes";
+import Logout from "./Components/Logout";
 
 function App() {
   const [modal, setModal] = useState({
@@ -33,7 +34,9 @@ function App() {
             <Sidebar setModal={setModal} />
             <TaskContextProvider>
               <Modal modalOpen={modal.active} closeModal={closeModal}>
-                <AddTask setModal={setModal} />
+                {modal.mode === "addtask" ? <AddTask setModal={setModal} />
+                  : <Logout setModal={setModal} />
+                }
               </Modal>
 
               <Routes>

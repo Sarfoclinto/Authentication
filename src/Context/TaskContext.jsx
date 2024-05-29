@@ -32,10 +32,12 @@ const TaskContextProvider = (props) => {
     ]
   );
   const [newTask, setNewTask] = useState({
+    title: "",
     task: "",
     date: "",
     id: "",
     complete: false,
+    bg: "blue-lin-bg"
   });
 
   const handleComplete = (e) => {

@@ -18,8 +18,8 @@ function Tasklist({ setModal }) {
                 <button
                   className=""
                   onClick={() => {
-                    setModal((prev) => {
-                      return { ...prev, active: true };
+                    setModal(() => {
+                      return { active: true, mode: "addtask" };
                     });
                   }}
                 >

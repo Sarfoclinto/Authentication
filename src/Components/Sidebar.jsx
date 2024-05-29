@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { act, useContext } from "react";
 import Sidelinks from "./Sidelinks";
 import { UserContext } from "../Context/UserContext";
 
@@ -32,6 +32,19 @@ function Sidebar({ setModal }) {
         <ul className="flex flex-col gap-y-2">
           <Sidelinks name="Dashboard" img="home" to="dashboard" />
           <Sidelinks name="Tasklist" img="task" to="tasklist" />
+          {user?.email && (
+            <button
+              onClick={() => {
+                setModal({ active: true, mode: "logout" });
+              }}
+              className="flex items-center py-2 gap-x-2 cursor-pointer"
+            >
+              <img src={`src/assets/logout.png`} alt="" className="w-2/12" />
+              <p className="text-purple-700 font-semibold text-base hover:text-black">
+                Logout
+              </p>
+            </button>
+          )}
         </ul>
       </nav>
     </aside>
