@@ -23,7 +23,7 @@ function Dashboard() {
     <div id="dashboard" className=" w-full p-1 ">
       <CardNav />
       <div id="content">
-        <div id="cards " className="flex w-full gap-6 ">
+        <div id="cards " className=" flex w-full gap-6  ">
           <Card
             title="Web Development"
             task={10}
@@ -50,25 +50,11 @@ function Dashboard() {
             <h1 className="font-bold text-purple-900 mt-3 text-xl">
               Tasks for today
             </h1>
-            {/* <TaskCard
-              bg="orange-li-bg"
-              title="Mobile App"
-              task="Prepare Figma file"
-              value="true"
-            />
-            <TaskCard
-              bg="purple-lin-bg"
-              title="UX wireframes"
-              task="Design UX wireframes"
-              value="true"
-            />
-            <TaskCard
-              bg="blue-lin-bg"
-              title="Mobile App"
-              task="Search"
-              value="true"
-            /> */}
-            {tasks.length<1 ? <div className="font-bold text-3xl">No task</div> :others}
+            {tasks.length < 1 ? (
+              <div className="font-bold text-3xl">No task</div>
+            ) : (
+              <div id="min" className="p-1 flex flex-col gap-3 h-64 overflow-y-scroll">{others}</div>
+            )}
           </div>
           <div id="statistics" className=" flex w-1/2"></div>
         </div>
